@@ -215,13 +215,13 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\QtProjectEngine\Qt5ProjectEngineLib2010.csproj">
-      <Project>{ACDEBCAC-B50B-4045-A769-D222F0195B0C}</Project>
-      <Name>Qt5ProjectEngineLib2010</Name>
+    <ProjectReference Include="..\QtProjectEngine\Qt5ProjectEngineLib2012.csproj">
+      <Project>{acdebcac-b50b-4045-a769-d222f0195b0c}</Project>
+      <Name>Qt5ProjectEngineLib2012</Name>
     </ProjectReference>
-    <ProjectReference Include="..\QtProjectLib\Qt5ProjectLib2010.csproj">
-      <Project>{2785D082-CE93-4097-BF45-072083A53261}</Project>
-      <Name>Qt5ProjectLib2010</Name>
+    <ProjectReference Include="..\QtProjectLib\Qt5ProjectLib2012.csproj">
+      <Project>{2785d082-ce93-4097-bf45-072083a53261}</Project>
+      <Name>Qt5ProjectLib2012</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSHARP.Targets" />

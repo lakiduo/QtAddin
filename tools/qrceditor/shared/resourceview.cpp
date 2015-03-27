@@ -45,14 +45,14 @@
 
 #include <QtCore/QDebug>
 
-#include <QtWidgets/QAction>
-#include <QtWidgets/QApplication>
-#include <QtWidgets/QFileDialog>
-#include <QtWidgets/QHeaderView>
-#include <QtWidgets/QInputDialog>
-#include <QtWidgets/QMenu>
+#include <QtGui/QAction>
+#include <QtGui/QApplication>
+#include <QtGui/QFileDialog>
+#include <QtGui/QHeaderView>
+#include <QtGui/QInputDialog>
+#include <QtGui/QMenu>
 #include <QtGui/QMouseEvent>
-#include <QtWidgets/QUndoStack>
+#include <QtGui/QUndoStack>
 
 namespace SharedTools {
 

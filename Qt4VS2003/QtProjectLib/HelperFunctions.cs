@@ -977,6 +977,9 @@ namespace Digia.Qt5ProjectLib
             sw.WriteLine("		<Configuration");
             sw.WriteLine("			Name=\"Debug|" + platformName + "\">");
             sw.WriteLine("		</Configuration>");
+            sw.WriteLine("		<Configuration");
+            sw.WriteLine("			Name=\"Hybrid|" + platformName + "\">");
+            sw.WriteLine("		</Configuration>");
             sw.WriteLine("	</Configurations>");
             sw.WriteLine("	<Files>");
 

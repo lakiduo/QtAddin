@@ -231,7 +231,8 @@ namespace Digia.Qt5ProjectLib
                 CompilerToolWrapper compiler = CompilerToolWrapper.Create(config);
 
                 if (((!IsDebugConfiguration(config)) && ((bldConf & BuildConfig.Release) != 0)) ||
-                    ((IsDebugConfiguration(config)) && ((bldConf & BuildConfig.Debug) != 0)))
+                    ((IsDebugConfiguration(config)) && ((bldConf & BuildConfig.Debug) != 0)) ||
+                    ((IsDebugConfiguration(config)) && ((bldConf & BuildConfig.Hybrid) != 0)))
                 {
                     compiler.AddPreprocessorDefinition(define);
                 }
@@ -618,6 +619,14 @@ namespace Digia.Qt5ProjectLib
                     compiler.SetDebugInformationFormat(debugOption.debugEnabled);
                     compiler.SetRuntimeLibrary(runtimeLibraryOption.rtMultiThreadedDebugDLL);
                 }
+                else if (config.Name.StartsWith("Hybrid"))
+                {
+                    isDebugConfiguration = true;
+                    compiler.SetOptimization(optimizeOption.optimizeDisabled);
+                    compiler.SetDebugInformationFormat(debugOption.debugEnabled);
+                    compiler.SetRuntimeLibrary(runtimeLibraryOption.rtMultiThreadedDLL);
+                }
+                
                 compiler.AddAdditionalIncludeDirectories(
                     ".;" + "$(QTDIR)\\include;" + QtVSIPSettings.GetMocDirectory(envPro));
 
@@ -3452,7 +3461,8 @@ namespace Digia.Qt5ProjectLib
 
             XmlNode configurations = vsProj.SelectSingleNode("Configurations");
             XmlNodeList cfgList = configurations.SelectNodes("Configuration[@Name='Debug|" + oldPlatformName + "'] | " +
-                                                             "Configuration[@Name='Release|" + oldPlatformName + "']");
+                                                             "Configuration[@Name='Release|" + oldPlatformName + "']" +
+                                                             "Configuration[@Name='Hybrid|" + oldPlatformName + "']");
             foreach (XmlNode oldCfg in cfgList)
             {
                 XmlElement newCfg = (XmlElement)oldCfg.Clone();
@@ -3462,7 +3472,8 @@ namespace Digia.Qt5ProjectLib
 
             const string fileCfgPath = "Files/Filter/File/FileConfiguration";
             XmlNodeList fileCfgList = vsProj.SelectNodes(fileCfgPath + "[@Name='Debug|" + oldPlatformName + "'] | " +
-                                                         fileCfgPath + "[@Name='Release|" + oldPlatformName + "']");
+                                                         fileCfgPath + "[@Name='Release|" + oldPlatformName + "']" +
+                                                         fileCfgPath + "[@Name='Hybrid|" + oldPlatformName + "']");
             foreach (XmlNode oldCfg in fileCfgList)
             {
                 XmlElement newCfg = (XmlElement)oldCfg.Clone();

@@ -43,9 +43,9 @@
 #include "undocommands_p.h"
 
 #include <QtCore/QDebug>
-#include <QtWidgets/QMenu>
-#include <QtWidgets/QFileDialog>
-#include <QtWidgets/QMessageBox>
+#include <QtGui/QMenu>
+#include <QtGui/QFileDialog>
+#include <QtGui/QMessageBox>
 
 using namespace SharedTools;
 

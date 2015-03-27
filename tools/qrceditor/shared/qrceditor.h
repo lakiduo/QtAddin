@@ -45,8 +45,8 @@
 #include "ui_qrceditor.h"
 #include "resourceview.h"
 
-#include <QtWidgets/QWidget>
-#include <QtWidgets/QUndoStack>
+#include <QtGui/QWidget>
+#include <QtGui/QUndoStack>
 
 namespace SharedTools {
 

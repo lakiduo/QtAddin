@@ -44,7 +44,7 @@
 
 #include "resourcefile_p.h"
 
-#include <QtWidgets/QTreeView>
+#include <QtGui/QTreeView>
 #include <QtCore/QPoint>
 
 using namespace qdesigner_internal;

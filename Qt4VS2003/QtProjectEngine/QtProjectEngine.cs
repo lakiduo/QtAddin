@@ -79,9 +79,9 @@ namespace Digia.Qt5ProjectLib
                 return BuildConfig.Release;
             else if (configName == "DEBUG")
                 return BuildConfig.Debug;
-            else if (configName == "BOTH")
-                return BuildConfig.Both;
-            return BuildConfig.Both; // fall back to both
+            else if (configName == "HYBRID")
+                return BuildConfig.Hybrid;
+            return BuildConfig.Hybrid; // fall back to both
         }
 
         private FakeFilter GetFakeFilterFromName(string filterName)

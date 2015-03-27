@@ -95,7 +95,7 @@ public:
         }
 
         m_valid = true;
-        m_flat = evaluator.isActiveConfig(QStringLiteral("flat"));
+        m_flat = evaluator.isActiveConfig(QString("flat"));
 
         foreach (const Mapping &mapping, m_variableMappings)
             *mapping.first = evaluator.values(mapping.second).toQStringList();

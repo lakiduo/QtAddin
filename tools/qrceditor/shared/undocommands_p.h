@@ -45,7 +45,7 @@
 #include "resourceview.h"
 
 #include <QtCore/QString>
-#include <QtWidgets/QUndoCommand>
+#include <QtGui/QUndoCommand>
 
 QT_BEGIN_NAMESPACE
 class QModelIndex;

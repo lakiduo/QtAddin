@@ -47,7 +47,7 @@
 
 QString toString(bool b)
 {
-    return b ? QStringLiteral("true") : QStringLiteral("false");
+    return b ? QString("true") : QString("false");
 }
 
 int main(int argc, char *argv[])

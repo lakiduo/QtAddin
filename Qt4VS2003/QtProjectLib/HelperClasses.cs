@@ -99,7 +99,7 @@ namespace Digia.Qt5ProjectLib
 
     public struct BuildConfig
     {
-        public const uint Both    = 0x03;
+        public const uint Hybrid  = 0x03;
         public const uint Release = 0x01;
         public const uint Debug   = 0x02;
     }
