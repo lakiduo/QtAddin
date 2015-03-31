@@ -583,12 +583,12 @@ namespace Digia.Qt5ProjectLib
                     }
                     if (linker != null)
                     {
-                        linker.AdditionalLibraryDirectories = ReplaceCaseInsensitive(linker.AdditionalLibraryDirectories, "$(QTDIR)", qtDir);
+                        linker.AdditionalLibraryDirectories = ReplaceCaseInsensitive(linker.AdditionalLibraryDirectories, "$(QTLIB)", qtDir);
                         linker.AdditionalDependencies = AddFullPathToAdditionalDependencies(qtDir, linker.AdditionalDependencies);
                     }
                     else
                     {
-                        librarian.AdditionalLibraryDirectories = ReplaceCaseInsensitive(librarian.AdditionalLibraryDirectories, "$(QTDIR)", qtDir);
+                        librarian.AdditionalLibraryDirectories = ReplaceCaseInsensitive(librarian.AdditionalLibraryDirectories, "$(QTLIB)", qtDir);
                         librarian.AdditionalDependencies = AddFullPathToAdditionalDependencies(qtDir, librarian.AdditionalDependencies);
                     }
                 }
@@ -659,7 +659,7 @@ namespace Digia.Qt5ProjectLib
                         List<string> paths = linkerToolWrapper.AdditionalLibraryDirectories;
                         if (paths != null)
                         {
-                            ReplaceDirectory(ref paths, qtDir, "$(QTDIR)", project);
+                            ReplaceDirectory(ref paths, qtDir, "$(QTLIB)", project);
                             linkerToolWrapper.AdditionalLibraryDirectories = paths;
                         }
                     }

@@ -164,6 +164,8 @@ namespace Digia.Qt5ProjectLib
 
             if (platformName != "Win32")
                 qtPro.SelectSolutionPlatform(platformName);
+           
+
             versionManager.SaveProjectQtVersion(pro, qtVersion);
 
             qtPro.MarkAsQtProject("v1.0");

@@ -208,7 +208,8 @@ namespace Digia.Qt5ProjectLib
             // ### So actually we should check QtCore4.dll / QtCored4.dll instead.
             // ### Unfortunately there's no Win API for checking the architecture of DLLs.
             // ### We must read the PE header instead.
-            string fileToCheck = qtDir + "\\bin\\qmake.exe";
+            return true;
+            string fileToCheck = qtDir + "\\compilers\\qmake.exe";
             if (!File.Exists(fileToCheck))
                 throw new QtVSException("Can't find " + fileToCheck);
 
