@@ -407,7 +407,7 @@ namespace Digia.Qt5ProjectLib
 
             if (moduleName.StartsWith("Qt"))
             {
-                moduleName = "Qt5" + moduleName.Substring(2);
+                moduleName = "Qt" + moduleName.Substring(2) + "_Ad_4";
             }
             string full_path = install_path + "\\lib\\" + moduleName + ".lib";
 

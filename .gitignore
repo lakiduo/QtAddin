@@ -24,3 +24,10 @@ Qt4VS2003/Doc/html
 Qt4VS2003/Qt4VSAddin/StringResources*.resources
 *.UnmanagedRegistration.cache
 Trolltech.Qt4VS200?Base.xml
+addin.patch
+backupMakefileRelease/qmakefilereader_Makefile.Debug
+backupMakefileRelease/qmakefilereader_Makefile.Release
+backupMakefileRelease/qrceditor_Makefile.Debug
+backupMakefileRelease/qrceditor_Makefile.Release
+tools/qmakefilereader/bk_Makefile - Copy.Release
+tools/qrceditor/bk_Makefile - Copy.Release

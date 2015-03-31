@@ -1,7 +1,7 @@
 #ifndef %PRE_DEF%
 #define %PRE_DEF%
 
-#include <QtWidgets/QWidget>
+#include <QtGui/QWidget>
 #include <ActiveQt/QAxBindable>
 
 #include "%UI_HDR%"

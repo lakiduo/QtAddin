@@ -1,7 +1,7 @@
 #ifndef %PRE_DEF%
 #define %PRE_DEF%
 
-#include <QtWidgets/%BASECLASS%>
+#include <QtGui/%BASECLASS%>
 #include "%UI_HDR%"
 
 class %CLASS% : public %BASECLASS%

@@ -1,7 +1,7 @@
 #ifndef %HEADER_PRE_DEF%
 #define %HEADER_PRE_DEF%
 
-#include <QtWidgets/%BASECLASS%>
+#include <QtGui/%BASECLASS%>
 
 class %CLASS% : public %BASECLASS%
 {

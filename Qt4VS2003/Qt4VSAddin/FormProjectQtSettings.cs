@@ -216,7 +216,7 @@ namespace Qt5VSAddin
                 string libraryPrefix = info.LibraryPrefix;
                 if (libraryPrefix.StartsWith("Qt"))
                 {
-                    libraryPrefix = "Qt5" + libraryPrefix.Substring(2);
+                    libraryPrefix = "Qt" + libraryPrefix.Substring(2) + "_Ad_4";
                 }
                 string full_path = install_path + "\\lib\\" + libraryPrefix + ".lib";
                 System.IO.FileInfo fi = new System.IO.FileInfo(full_path);

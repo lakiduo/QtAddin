@@ -155,7 +155,7 @@ namespace Qt5VSAddin
                     System.Type.Missing, targetIndex, true)
                     as CommandBarPopup;
                 qtPopup.CommandBar.Name = Res.CommandBarName;
-                qtPopup.Caption = "&Qt5";
+                qtPopup.Caption = "&Qt4Max";
             }
             qtPopup.Visible = true;
         }

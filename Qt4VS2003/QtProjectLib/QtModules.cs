@@ -141,9 +141,16 @@ namespace Digia.Qt5ProjectLib
             List<string> libs = new List<string>();
             string libName = LibraryPrefix;
             if (libName.StartsWith("Qt"))
-                libName = "Qt5" + libName.Substring(2);
-            if (isDebugCfg)
-                libName += "d";
+                libName = "Qt" + libName.Substring(2);
+
+            libName += "_Ad_";
+            if (libName.StartsWith("Qt"))
+            {
+                if (isDebugCfg)
+                    libName += "d4";
+                else
+                    libName += "4";
+            }
             libName += ".lib";
             libs.Add(libName);
             if (isWindowsCE)
@@ -157,9 +164,11 @@ namespace Digia.Qt5ProjectLib
         {
             string fileName = LibraryPrefix;
             if (fileName.StartsWith("Qt"))
-                fileName = "Qt5" + fileName.Substring(2);
+                fileName = "Qt" + fileName.Substring(2) + "_Ad_";
             if (isDebugCfg)
-                fileName += "d";
+                fileName += "d4";
+            else
+                fileName += "4";
             fileName += ".dll";
             return fileName;
         }
@@ -211,6 +220,7 @@ namespace Digia.Qt5ProjectLib
         {
             QtModuleInfo moduleInfo = null;
             InitQtModule(QtModule.Core, "QtCore", "QT_CORE_LIB");
+            InitQtModule(QtModule.Gui, "QtGui", "QT_GUI_LIB");
             InitQtModule(QtModule.Multimedia, "QtMultimedia", "QT_MULTIMEDIA_LIB");
             InitQtModule(QtModule.Sql, "QtSql", "QT_SQL_LIB");
             InitQtModule(QtModule.Network, "QtNetwork", "QT_NETWORK_LIB");
@@ -250,53 +260,53 @@ namespace Digia.Qt5ProjectLib
             moduleInfo = InitQtModule(QtModule.ActiveQtS, "QtAxServer", "QAXSERVER");
             moduleInfo.HasDLL = false;
             moduleInfo.IncludePath = "$(QTDIR)\\include\\ActiveQt";
-            moduleInfo.AdditionalLibraries.Add("Qt5AxBase.lib");
-            moduleInfo.AdditionalLibrariesDebug.Add("Qt5AxBased.lib");
+            //moduleInfo.AdditionalLibraries.Add("Qt5AxBase.lib");
+            //moduleInfo.AdditionalLibrariesDebug.Add("Qt5AxBased.lib");
 
             moduleInfo = InitQtModule(QtModule.ActiveQtC, "QtAxContainer", "");
             moduleInfo.HasDLL = false;
             moduleInfo.IncludePath = "$(QTDIR)\\include\\ActiveQt";
-            moduleInfo.AdditionalLibraries.Add("Qt5AxBase.lib");
-            moduleInfo.AdditionalLibrariesDebug.Add("Qt5AxBased.lib");
+            //moduleInfo.AdditionalLibraries.Add("Qt5AxBase.lib");
+            //moduleInfo.AdditionalLibrariesDebug.Add("Qt5AxBased.lib");
 
             moduleInfo = InitQtModule(QtModule.UiTools, "QtUiTools", "QT_UITOOLS_LIB");
             moduleInfo.dependentModules.Add(QtModule.Xml);
             moduleInfo.HasDLL = false;
 
             // Qt5
-            InitQtModule(QtModule.Widgets, "QtWidgets", "QT_WIDGETS_LIB");
+            //InitQtModule(QtModule.Widgets, "QtWidgets", "QT_WIDGETS_LIB");
 
-            moduleInfo = InitQtModule(QtModule.Gui, "QtGui", "QT_GUI_LIB");
-            moduleInfo.dependentModules.Add(QtModule.Widgets);
+            //moduleInfo = InitQtModule(QtModule.Gui, "QtGui", "QT_GUI_LIB");
+            //moduleInfo.dependentModules.Add(QtModule.Widgets);
 
-            InitQtModule(QtModule.ThreeD, "Qt3D", "QT_3D_LIB");
-            InitQtModule(QtModule.Location, "QtLocation", "QT_LOCATION_LIB");
+            //InitQtModule(QtModule.ThreeD, "Qt3D", "QT_3D_LIB");
+            //InitQtModule(QtModule.Location, "QtLocation", "QT_LOCATION_LIB");
 
-            InitQtModule(QtModule.Qml, "QtQml", "QT_QML_LIB");
-            moduleInfo = InitQtModule(QtModule.Bluetooth, "QtBluetooth", "QT_BLUETOOTH_LIB");
-            InitQtModule(QtModule.PrintSupport, "QtPrintSupport", "QT_PRINTSUPPORT_LIB");
+            //InitQtModule(QtModule.Qml, "QtQml", "QT_QML_LIB");
+            //moduleInfo = InitQtModule(QtModule.Bluetooth, "QtBluetooth", "QT_BLUETOOTH_LIB");
+            //InitQtModule(QtModule.PrintSupport, "QtPrintSupport", "QT_PRINTSUPPORT_LIB");
 
-            moduleInfo = InitQtModule(QtModule.Sensors, "QtSensors", "QT_SENSORS_LIB");
-            InitQtModule(QtModule.Quick, "QtQuick", "QT_QUICK_LIB");
+            //moduleInfo = InitQtModule(QtModule.Sensors, "QtSensors", "QT_SENSORS_LIB");
+            //InitQtModule(QtModule.Quick, "QtQuick", "QT_QUICK_LIB");
 
-            InitQtModule(QtModule.ThreeDQuick, "Qt3DQuick", "QT_3DQUICK_LIB");
+            //InitQtModule(QtModule.ThreeDQuick, "Qt3DQuick", "QT_3DQUICK_LIB");
 
-            InitQtModule(QtModule.WebkitWidgets, "QtWebkitWidgets", "QT_WEBKITWIDGETS_LIB");
+            //InitQtModule(QtModule.WebkitWidgets, "QtWebkitWidgets", "QT_WEBKITWIDGETS_LIB");
 
-            InitQtModule(QtModule.Concurrent, "QtConcurrent", "QT_CONCURRENT_LIB");
-            InitQtModule(QtModule.MultimediaWidgets, "QtMultimediaWidgets", "QT_MULTIMEDIAWIDGETS_LIB");
+            //InitQtModule(QtModule.Concurrent, "QtConcurrent", "QT_CONCURRENT_LIB");
+            //InitQtModule(QtModule.MultimediaWidgets, "QtMultimediaWidgets", "QT_MULTIMEDIAWIDGETS_LIB");
 
-            moduleInfo = InitQtModule(QtModule.Enginio, "Enginio", "QT_ENGINIO_LIB");
-            moduleInfo.dependentModules.Add(QtModule.Network);
+            //moduleInfo = InitQtModule(QtModule.Enginio, "Enginio", "QT_ENGINIO_LIB");
+            //moduleInfo.dependentModules.Add(QtModule.Network);
 
-            InitQtModule(QtModule.Nfc, "QtNfc", "QT_NFC_LIB");
-            InitQtModule(QtModule.Positioning, "QtPositioning", "QT_POSITIONING_LIB");
-            InitQtModule(QtModule.SerialPort, "QtSerialPort", "QT_SERIALPORT_LIB");
-            InitQtModule(QtModule.WebChannel, "QtWebChannel", "QT_WEBCHANNEL_LIB");
-            moduleInfo = InitQtModule(QtModule.WebSockets, "QtWebSockets", "QT_WEBSOCKETS_LIB");
-            moduleInfo.dependentModules.Add(QtModule.Network);
-            InitQtModule(QtModule.WindowsExtras, "QtWinExtras", "QT_WINEXTRAS_LIB");
-            InitQtModule(QtModule.QuickWidgets, "QtQuickWidgets", "QT_QUICKWIDGETS_LIB");
+            //InitQtModule(QtModule.Nfc, "QtNfc", "QT_NFC_LIB");
+            //InitQtModule(QtModule.Positioning, "QtPositioning", "QT_POSITIONING_LIB");
+            //InitQtModule(QtModule.SerialPort, "QtSerialPort", "QT_SERIALPORT_LIB");
+            //InitQtModule(QtModule.WebChannel, "QtWebChannel", "QT_WEBCHANNEL_LIB");
+            //moduleInfo = InitQtModule(QtModule.WebSockets, "QtWebSockets", "QT_WEBSOCKETS_LIB");
+            //moduleInfo.dependentModules.Add(QtModule.Network);
+            //InitQtModule(QtModule.WindowsExtras, "QtWinExtras", "QT_WINEXTRAS_LIB");
+            //InitQtModule(QtModule.QuickWidgets, "QtQuickWidgets", "QT_QUICKWIDGETS_LIB");
 
         }
 

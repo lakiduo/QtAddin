@@ -76,7 +76,7 @@ namespace Digia.Qt5ProjectLib
 
         protected void Init(VersionInformation versionInfo)
         {
-            string filename = versionInfo.qtDir + "\\mkspecs\\default\\qmake.conf";
+            string filename = versionInfo.qtDir + "\\mkspecs\\win32-msvc2012\\qmake.conf";
             fileInfo = new FileInfo(filename);
 
             // Starting from Qt5 beta2 there is no more "\\mkspecs\\default" folder available
