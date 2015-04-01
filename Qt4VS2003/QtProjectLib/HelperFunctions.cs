@@ -554,6 +554,10 @@ namespace Digia.Qt5ProjectLib
         {
             string qtDir = null;
             VCProject vcPro = (VCProject)project.Object;
+            string keyword = vcPro.keyword;
+            if (keyword == null || !keyword.StartsWith(Resources.qtProjectKeyword))
+                vcPro.keyword = Resources.qtProjectKeyword;
+
             if (!IsQMakeProject(project))
                 return;
             if (IsQtProject(project))
@@ -612,7 +616,7 @@ namespace Digia.Qt5ProjectLib
                 if (!qtPro.SelectSolutionPlatform(platformName) || !qtPro.HasPlatform(platformName))
                 {
                     bool newProject = false;
-                    qtPro.CreatePlatform("Win32", platformName, null, vi, ref newProject);
+                    qtPro.CreatePlatform("x64", platformName, null, vi, ref newProject);
                     if (!qtPro.SelectSolutionPlatform(platformName))
                     {
                         Messages.PaneMessage(project.DTE, "Can't select the platform " + platformName + ".");

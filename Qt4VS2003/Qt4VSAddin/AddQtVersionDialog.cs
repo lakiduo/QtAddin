@@ -345,6 +345,8 @@ namespace Qt5VSAddin
 
                 fi = new FileInfo(pathBox.Text + "\\bin\\qmake.exe");
                 if (!fi.Exists)
+                    fi = new FileInfo(pathBox.Text + "\\compilers\\qmake.exe");
+                if (!fi.Exists)
                 {
                     lastErrorString = SR.GetString("AddQtVersionDialog_NotFound", fi.FullName);
                     okButton.Enabled = false;

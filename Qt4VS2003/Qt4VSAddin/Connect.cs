@@ -218,8 +218,7 @@ namespace Qt5VSAddin
                         else
                             status = vsCommandStatus.vsCommandStatusSupported;
                     }
-                    else if (commandName == Res.ChangeProjectQtVersionFullCommand ||
-                        commandName == Res.ConvertToQtFullCommand)
+                    else if (commandName == Res.ChangeProjectQtVersionFullCommand)
                     {
                         Project prj = HelperFunctions.GetSelectedProject(_applicationObject);
                         if (prj == null || HelperFunctions.IsQtProject(prj))
@@ -229,6 +228,18 @@ namespace Qt5VSAddin
                                                     | vsCommandStatus.vsCommandStatusEnabled;
                         else
                             status = vsCommandStatus.vsCommandStatusInvisible;
+                    }
+                    else if (commandName == Res.ConvertToQtFullCommand)
+                    {
+                        Project prj = HelperFunctions.GetSelectedProject(_applicationObject);
+                        if (prj == null || HelperFunctions.IsQtProject(prj))
+                            status = vsCommandStatus.vsCommandStatusInvisible;
+                        else if (HelperFunctions.IsQMakeProject(prj))
+                            status = (vsCommandStatus)vsCommandStatus.vsCommandStatusSupported
+                                                    | vsCommandStatus.vsCommandStatusEnabled;
+                        else
+                            status = (vsCommandStatus)vsCommandStatus.vsCommandStatusSupported
+                                                    | vsCommandStatus.vsCommandStatusEnabled;
                     }
                     else if ((commandName == Res.ChangeSolutionQtVersionFullCommand) ||
                         (commandName == Res.lupdateSolutionFullCommand) ||

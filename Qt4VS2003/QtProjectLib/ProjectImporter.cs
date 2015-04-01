@@ -189,7 +189,7 @@ namespace Digia.Qt5ProjectLib
                         if (!qtPro.SelectSolutionPlatform(platformName) || !qtPro.HasPlatform(platformName))
                         {
                             bool newProject = false;
-                            qtPro.CreatePlatform("Win32", platformName, null, versionInfo, ref newProject);
+                            qtPro.CreatePlatform("x64", platformName, null, versionInfo, ref newProject);
                             if (!qtPro.SelectSolutionPlatform(platformName))
                             {
                                 Messages.PaneMessage(dteObject, "Can't select the platform " + platformName + ".");

@@ -335,7 +335,7 @@ namespace Digia.Qt5ProjectLib
             {
                 // Accessing the ActiveConfiguration property throws an exception
                 // if there's an "unconfigured" platform in the Solution platform combo box.
-                platformName = "Win32";
+                platformName = "X64";
             }
             string version = GetProjectQtVersion(project, platformName);
 
