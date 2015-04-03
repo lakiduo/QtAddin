@@ -437,6 +437,10 @@ namespace Digia.Qt5ProjectLib
 
             foreach (VCFile vcfile in (IVCCollection)vcPro.Files)
             {
+                //only apply to the file with Q_OBJECT macro
+                if (!HelperFunctions.HasQObjectDeclaration(vcfile))
+                    continue;
+
                 foreach (VCFileConfiguration config in (IVCCollection)vcfile.FileConfigurations)
                 {
                     try
@@ -654,7 +658,17 @@ namespace Digia.Qt5ProjectLib
                         if (additionalIncludes != null)
                         {
                             ReplaceDirectory(ref additionalIncludes, qtDir, "$(QTDIR)", project);
+                            //if there is no $(QTDIR)\include and $(QTDIR)\include/QtCore, add it
+                            if (!additionalIncludes.Contains("$(QTDIR)\\include"))
+                                additionalIncludes.Add("$(QTDIR)\\include");
+                            if (!additionalIncludes.Contains("$(QTDIR)\\include\\QtCore"))
+                                additionalIncludes.Add("$(QTDIR)\\include\\QtCore");
                             compiler.AdditionalIncludeDirectories = additionalIncludes;
+                        }
+                        else
+                        {
+                            List<string> qtIncludes = new List<string> { "$(QTDIR)\\include", "$(QTDIR)\\include/QtCore" };
+                            compiler.AdditionalIncludeDirectories = qtIncludes;
                         }
                     }
                     if (linker != null)
@@ -664,7 +678,15 @@ namespace Digia.Qt5ProjectLib
                         if (paths != null)
                         {
                             ReplaceDirectory(ref paths, qtDir, "$(QTLIB)", project);
+                            //if there is no $(QTLIB)\include, add it
+                            if (!paths.Contains("$(QTLIB)"))
+                                paths.Add("$(QTLIB)");
                             linkerToolWrapper.AdditionalLibraryDirectories = paths;
+                        }
+                        else
+                        {
+                            List<string> qtLibPath = new List<string>{"$(QTLIB)"};
+                             linkerToolWrapper.AdditionalLibraryDirectories = qtLibPath;
                         }
                     }
                 }
