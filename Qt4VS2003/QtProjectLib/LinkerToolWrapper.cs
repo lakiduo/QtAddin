@@ -128,6 +128,7 @@ namespace Digia.Qt5ProjectLib
                 string newAdditionalDependencies = "";
                 char[] separators = new char[] {' ', '\t'};
                 bool firstLoop = true;
+
                 foreach (string item in value)
                 {
                     if (firstLoop)
@@ -153,6 +154,8 @@ namespace Digia.Qt5ProjectLib
         /// <returns></returns>
         private static List<string> splitByWhitespace(string str)
         {
+            if (str.Contains("\\\"$(INHERIT)\\\""))
+                str = str.Replace("\\\"$(INHERIT)\\\"", "");
             char[] separators = new char[] { ' ', '\t' };
             int i = str.IndexOf('"');
             if (i == -1)

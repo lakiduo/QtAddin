@@ -661,13 +661,12 @@ namespace Digia.Qt5ProjectLib
                             //if there is no $(QTDIR)\include and $(QTDIR)\include/QtCore, add it
                             if (!additionalIncludes.Contains("$(QTDIR)\\include"))
                                 additionalIncludes.Add("$(QTDIR)\\include");
-                            if (!additionalIncludes.Contains("$(QTDIR)\\include\\QtCore"))
-                                additionalIncludes.Add("$(QTDIR)\\include\\QtCore");
+                           
                             compiler.AdditionalIncludeDirectories = additionalIncludes;
                         }
                         else
                         {
-                            List<string> qtIncludes = new List<string> { "$(QTDIR)\\include", "$(QTDIR)\\include/QtCore" };
+                            List<string> qtIncludes = new List<string> { "$(QTDIR)\\include" };
                             compiler.AdditionalIncludeDirectories = qtIncludes;
                         }
                     }
