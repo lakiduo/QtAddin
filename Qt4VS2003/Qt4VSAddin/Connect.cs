@@ -370,8 +370,12 @@ namespace Qt5VSAddin
                             Project pro = HelperFunctions.GetSelectedQtProject(dte);
                             if (pro != null)
                             {
+                                QtVersionManager vm = QtVersionManager.The();
+                                VersionInformation versionInfo = vm.GetVersionInfo(pro);
+                                string platformName = versionInfo.GetVSPlatformName();
+                                string qtVersion = vm.GetProjectQtVersion(pro, platformName);
                                 if (formProjectQtSettings == null)
-                                    formProjectQtSettings = new FormProjectQtSettings();
+                                    formProjectQtSettings = new FormProjectQtSettings(qtVersion);
                                 formProjectQtSettings.SetProject(pro);
                                 formProjectQtSettings.StartPosition = FormStartPosition.CenterParent;
                                 MainWinWrapper ww = new MainWinWrapper(dte);

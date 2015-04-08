@@ -26,7 +26,7 @@
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent()
+        private void InitializeComponent(string qtVersion)
         {
             this.OptionsPropertyGrid = new System.Windows.Forms.PropertyGrid();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -189,6 +189,8 @@
             this.quickWidgetsLib.Size = new System.Drawing.Size(128, 24);
             this.quickWidgetsLib.TabIndex = 49;
             this.quickWidgetsLib.UseVisualStyleBackColor = true;
+            this.quickWidgetsLib.Enabled = false;
+
             // 
             // windowsExtrasLib
             // 
@@ -197,6 +199,8 @@
             this.windowsExtrasLib.Size = new System.Drawing.Size(135, 24);
             this.windowsExtrasLib.TabIndex = 63;
             this.windowsExtrasLib.UseVisualStyleBackColor = true;
+            this.windowsExtrasLib.Enabled = false;
+           
             // 
             // webSocketsLib
             // 
@@ -205,6 +209,7 @@
             this.webSocketsLib.Size = new System.Drawing.Size(135, 24);
             this.webSocketsLib.TabIndex = 61;
             this.webSocketsLib.UseVisualStyleBackColor = true;
+            this.webSocketsLib.Enabled = false;
             // 
             // webChannelLib
             // 
@@ -212,6 +217,8 @@
             this.webChannelLib.Name = "webChannelLib";
             this.webChannelLib.Size = new System.Drawing.Size(111, 24);
             this.webChannelLib.TabIndex = 58;
+            this.webChannelLib.Enabled = false;
+
             // 
             // serialPortLib
             // 
@@ -220,6 +227,8 @@
             this.serialPortLib.Size = new System.Drawing.Size(135, 24);
             this.serialPortLib.TabIndex = 53;
             this.serialPortLib.UseVisualStyleBackColor = true;
+            this.serialPortLib.Enabled = false;
+
             // 
             // positioningLib
             // 
@@ -227,6 +236,7 @@
             this.positioningLib.Name = "positioningLib";
             this.positioningLib.Size = new System.Drawing.Size(120, 24);
             this.positioningLib.TabIndex = 45;
+            this.positioningLib.Enabled = false;
             // 
             // nfcLib
             // 
@@ -234,6 +244,7 @@
             this.nfcLib.Name = "nfcLib";
             this.nfcLib.Size = new System.Drawing.Size(128, 24);
             this.nfcLib.TabIndex = 43;
+            this.nfcLib.Enabled = false;
             // 
             // enginioLib
             // 
@@ -241,6 +252,8 @@
             this.enginioLib.Name = "enginioLib";
             this.enginioLib.Size = new System.Drawing.Size(128, 24);
             this.enginioLib.TabIndex = 35;
+            this.enginioLib.IsAccessible = false;
+            this.enginioLib.Enabled = false;
             // 
             // uiToolsLib
             // 
@@ -265,6 +278,7 @@
             this.quickLib.Size = new System.Drawing.Size(128, 24);
             this.quickLib.TabIndex = 48;
             this.quickLib.UseVisualStyleBackColor = true;
+            this.quickLib.Enabled = false;
             // 
             // qmlLib
             // 
@@ -273,6 +287,7 @@
             this.qmlLib.Size = new System.Drawing.Size(128, 24);
             this.qmlLib.TabIndex = 47;
             this.qmlLib.UseVisualStyleBackColor = true;
+            this.qmlLib.Enabled = false;
             // 
             // webKitLib
             // 
@@ -309,6 +324,7 @@
             this.threeDLib.Size = new System.Drawing.Size(128, 24);
             this.threeDLib.TabIndex = 29;
             this.threeDLib.UseVisualStyleBackColor = true;
+            this.threeDLib.Enabled = false;
             // 
             // guiLib
             // 
@@ -345,6 +361,7 @@
             this.multimediaWidgetsLib.Size = new System.Drawing.Size(118, 24);
             this.multimediaWidgetsLib.TabIndex = 41;
             this.multimediaWidgetsLib.UseVisualStyleBackColor = true;
+            this.multimediaWidgetsLib.Enabled = false;
             // 
             // concurrentLib
             // 
@@ -353,6 +370,7 @@
             this.concurrentLib.Size = new System.Drawing.Size(128, 24);
             this.concurrentLib.TabIndex = 33;
             this.concurrentLib.UseVisualStyleBackColor = true;
+            this.concurrentLib.Enabled = false;
             // 
             // widgetsLib
             // 
@@ -361,6 +379,7 @@
             this.widgetsLib.Size = new System.Drawing.Size(135, 24);
             this.widgetsLib.TabIndex = 62;
             this.widgetsLib.UseVisualStyleBackColor = true;
+            this.widgetsLib.Enabled = false;
             // 
             // locationLib
             // 
@@ -369,6 +388,7 @@
             this.locationLib.Size = new System.Drawing.Size(128, 24);
             this.locationLib.TabIndex = 39;
             this.locationLib.UseVisualStyleBackColor = true;
+            this.locationLib.Enabled = false;
             // 
             // webkitWidgetsLib
             // 
@@ -377,6 +397,7 @@
             this.webkitWidgetsLib.Size = new System.Drawing.Size(135, 24);
             this.webkitWidgetsLib.TabIndex = 60;
             this.webkitWidgetsLib.UseVisualStyleBackColor = true;
+            this.webkitWidgetsLib.Enabled = false;
             // 
             // sensorsLib
             // 
@@ -385,6 +406,7 @@
             this.sensorsLib.Size = new System.Drawing.Size(135, 24);
             this.sensorsLib.TabIndex = 52;
             this.sensorsLib.UseVisualStyleBackColor = true;
+            this.sensorsLib.Enabled = false;
             // 
             // declarativeLib
             // 
@@ -401,6 +423,7 @@
             this.printSupportLib.Size = new System.Drawing.Size(135, 24);
             this.printSupportLib.TabIndex = 46;
             this.printSupportLib.UseVisualStyleBackColor = true;
+            this.printSupportLib.Enabled = false;
             // 
             // bluetoothLib
             // 
@@ -409,6 +432,7 @@
             this.bluetoothLib.Size = new System.Drawing.Size(137, 24);
             this.bluetoothLib.TabIndex = 32;
             this.bluetoothLib.UseVisualStyleBackColor = true;
+            this.bluetoothLib.Enabled = false;
             // 
             // helpLib
             // 
@@ -458,7 +482,8 @@
             this.scriptLib.Name = "scriptLib";
             this.scriptLib.Size = new System.Drawing.Size(128, 24);
             this.scriptLib.TabIndex = 50;
-            // 
+
+           
             // FormProjectQtSettings
             // 
             this.AcceptButton = this.okButton;

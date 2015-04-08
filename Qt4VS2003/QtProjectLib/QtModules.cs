@@ -257,13 +257,17 @@ namespace Digia.Qt5ProjectLib
             moduleInfo.AdditionalLibraries.Add("glu32.lib");
             moduleInfo.AdditionalLibrariesWinCE.Add("libgles_cm.lib");
 
-            moduleInfo = InitQtModule(QtModule.ActiveQtS, "QtAxServer", "QAXSERVER");
+            //Qt5 is Qt5AxServer
+            //moduleInfo = InitQtModule(QtModule.ActiveQtS, "QtAxServer", "QAXSERVER");
+            moduleInfo = InitQtModule(QtModule.ActiveQtS, "QAxServer", "QAXSERVER");
             moduleInfo.HasDLL = false;
             moduleInfo.IncludePath = "$(QTDIR)\\include\\ActiveQt";
             //moduleInfo.AdditionalLibraries.Add("Qt5AxBase.lib");
             //moduleInfo.AdditionalLibrariesDebug.Add("Qt5AxBased.lib");
 
-            moduleInfo = InitQtModule(QtModule.ActiveQtC, "QtAxContainer", "");
+            //Qt5 is Qt5AxContainer
+            // moduleInfo = InitQtModule(QtModule.ActiveQtC, "QtAxContainer", "");
+            moduleInfo = InitQtModule(QtModule.ActiveQtC, "QAxContainer", "");
             moduleInfo.HasDLL = false;
             moduleInfo.IncludePath = "$(QTDIR)\\include\\ActiveQt";
             //moduleInfo.AdditionalLibraries.Add("Qt5AxBase.lib");

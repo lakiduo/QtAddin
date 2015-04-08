@@ -53,6 +53,7 @@ namespace Qt5VSAddin
         private Project project;
         private QtProject qtProject;
         private ProjectQtSettings qtSettings = null;
+        private string qtVersion = null;
 
         private struct ModuleMapItem
         {
@@ -70,9 +71,11 @@ namespace Qt5VSAddin
 
         private List<ModuleMapItem> moduleMap = new List<ModuleMapItem>();
 
-        public FormProjectQtSettings()
+        public FormProjectQtSettings(string qtVersionStr)
         {
-            InitializeComponent();
+            qtVersion = qtVersionStr;
+            InitializeComponent(qtVersion);
+
             okButton.Text = SR.GetString("OK");
             cancelButton.Text = SR.GetString("Cancel");
             tabControl1.TabPages[0].Text = this.Text = SR.GetString("ActionDialog_Properties");
@@ -119,15 +122,15 @@ namespace Qt5VSAddin
             windowsExtrasLib.Text = SR.GetString("WindowsExtrasLibrary");
             quickWidgetsLib.Text = SR.GetString("QuickWidgetsLibrary");
 
+
             // essentials
-            AddMapping(threeDLib, QtModule.ThreeD);
+           
             AddMapping(coreLib, QtModule.Core);
             AddMapping(guiLib, QtModule.Gui);
-            AddMapping(locationLib, QtModule.Location);
+           
             AddMapping(multimediaLib, QtModule.Multimedia);
             AddMapping(networkLib, QtModule.Network);
-            AddMapping(qmlLib, QtModule.Qml);
-            AddMapping(quickLib, QtModule.Quick);
+            
             AddMapping(sqlLib, QtModule.Sql);
             AddMapping(testLib, QtModule.Test);
             AddMapping(webKitLib, QtModule.WebKit);
@@ -135,32 +138,43 @@ namespace Qt5VSAddin
             // add-ons
             AddMapping(activeQtCLib, QtModule.ActiveQtC);
             AddMapping(activeQtSLib, QtModule.ActiveQtS);
-            AddMapping(bluetoothLib, QtModule.Bluetooth);
+            
             AddMapping(helpLib, QtModule.Help);
             AddMapping(openGLLib, QtModule.OpenGL);
             AddMapping(scriptToolsLib, QtModule.ScriptTools);
             AddMapping(uiToolsLib, QtModule.UiTools);
-            AddMapping(printSupportLib, QtModule.PrintSupport);
+           
             AddMapping(declarativeLib, QtModule.Declarative);
             AddMapping(scriptLib, QtModule.Script);
-            AddMapping(sensorsLib, QtModule.Sensors);
+           
             AddMapping(svgLib, QtModule.Svg);
-            AddMapping(webkitWidgetsLib, QtModule.WebkitWidgets);
-            AddMapping(widgetsLib, QtModule.Widgets);
+           
             AddMapping(xmlLib, QtModule.Xml);
             AddMapping(xmlPatternsLib, QtModule.XmlPatterns);
 
-            AddMapping(concurrentLib, QtModule.Concurrent);
-            AddMapping(multimediaWidgetsLib, QtModule.MultimediaWidgets);
+            if (qtVersion.StartsWith("5"))
+            {
+                AddMapping(threeDLib, QtModule.ThreeD);
+                AddMapping(locationLib, QtModule.Location);
+                AddMapping(qmlLib, QtModule.Qml);
+                AddMapping(quickLib, QtModule.Quick);
+                AddMapping(bluetoothLib, QtModule.Bluetooth);
+                AddMapping(printSupportLib, QtModule.PrintSupport);
+                AddMapping(sensorsLib, QtModule.Sensors);
+                AddMapping(concurrentLib, QtModule.Concurrent);
+                AddMapping(multimediaWidgetsLib, QtModule.MultimediaWidgets);
+                AddMapping(webkitWidgetsLib, QtModule.WebkitWidgets);
+                AddMapping(widgetsLib, QtModule.Widgets);
 
-            AddMapping(enginioLib, QtModule.Enginio);
-            AddMapping(nfcLib, QtModule.Nfc);
-            AddMapping(positioningLib, QtModule.Positioning);
-            AddMapping(serialPortLib, QtModule.SerialPort);
-            AddMapping(webChannelLib, QtModule.WebChannel);
-            AddMapping(webSocketsLib, QtModule.WebSockets);
-            AddMapping(windowsExtrasLib, QtModule.WindowsExtras);
-            AddMapping(quickWidgetsLib, QtModule.QuickWidgets);
+                AddMapping(enginioLib, QtModule.Enginio);
+                AddMapping(nfcLib, QtModule.Nfc);
+                AddMapping(positioningLib, QtModule.Positioning);
+                AddMapping(serialPortLib, QtModule.SerialPort);
+                AddMapping(webChannelLib, QtModule.WebChannel);
+                AddMapping(webSocketsLib, QtModule.WebSockets);
+                AddMapping(windowsExtrasLib, QtModule.WindowsExtras);
+                AddMapping(quickWidgetsLib, QtModule.QuickWidgets);
+            }
 
 
             FormBorderStyle = FormBorderStyle.FixedDialog;
@@ -216,10 +230,23 @@ namespace Qt5VSAddin
                 string libraryPrefix = info.LibraryPrefix;
                 if (libraryPrefix.StartsWith("Qt"))
                 {
-                    libraryPrefix = "Qt" + libraryPrefix.Substring(2) + "_Ad_4";
+                    if (qtVersion.StartsWith("4"))
+                    {
+                        if (libraryPrefix.StartsWith("QtUiTools"))
+                            libraryPrefix = "Qt" + libraryPrefix.Substring(2) + "_Ad_";
+                        else
+                            libraryPrefix = "Qt" + libraryPrefix.Substring(2) + "_Ad_4";
+                    }
+                    else
+                        libraryPrefix = "Qt" + libraryPrefix.Substring(2);
                 }
                 string full_path = install_path + "\\lib\\" + libraryPrefix + ".lib";
                 System.IO.FileInfo fi = new System.IO.FileInfo(full_path);
+                if (!fi.Exists)
+                {
+                    full_path = install_path + "\\binary\\win_vc11\\x64\\lib\\" + libraryPrefix + ".lib";
+                    fi = new System.IO.FileInfo(full_path);
+                }
                 item.checkbox.Enabled = fi.Exists;
                 if (fi.Exists == false)
                 {

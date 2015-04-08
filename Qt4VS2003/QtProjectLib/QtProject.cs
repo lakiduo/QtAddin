@@ -253,6 +253,7 @@ namespace Digia.Qt5ProjectLib
             {
                 CompilerToolWrapper compiler = CompilerToolWrapper.Create(config);
                 VCLinkerTool linker = (VCLinkerTool)((IVCCollection)config.Tools).Item("VCLinkerTool");
+                string depens = linker.AdditionalDependencies;
 
                 QtModuleInfo info = QtModules.Instance.ModuleInformation(module);
                 if (compiler != null)
