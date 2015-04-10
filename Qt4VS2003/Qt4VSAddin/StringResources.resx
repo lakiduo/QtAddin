@@ -210,6 +210,9 @@
   <data name="XmlPatternsLibrary" xml:space="preserve">
     <value>XML Patterns</value>
   </data>
+  <data name="MFCMigrationLibrary" xml:space="preserve">
+    <value>MFC Migration</value>
+  </data>
   <data name="AddQtModule" xml:space="preserve">
     <value>Add/Remove Qt Module</value>
   </data>

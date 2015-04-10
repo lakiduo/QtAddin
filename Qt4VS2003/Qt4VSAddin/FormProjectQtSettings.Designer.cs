@@ -72,6 +72,7 @@
             this.xmlPatternsLib = new System.Windows.Forms.CheckBox();
             this.openGLLib = new System.Windows.Forms.CheckBox();
             this.scriptLib = new System.Windows.Forms.CheckBox();
+            this.mfcMigrationLib = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -175,6 +176,7 @@
             this.tabPage2.Controls.Add(this.xmlPatternsLib);
             this.tabPage2.Controls.Add(this.openGLLib);
             this.tabPage2.Controls.Add(this.scriptLib);
+            this.tabPage2.Controls.Add(this.mfcMigrationLib);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -468,6 +470,14 @@
             this.xmlPatternsLib.Name = "xmlPatternsLib";
             this.xmlPatternsLib.Size = new System.Drawing.Size(118, 24);
             this.xmlPatternsLib.TabIndex = 65;
+
+            // 
+            // mfcMigrationLib
+            // 
+            this.mfcMigrationLib.Location = new System.Drawing.Point(294, 267);
+            this.mfcMigrationLib.Name = "mfcMigrationLib";
+            this.mfcMigrationLib.Size = new System.Drawing.Size(128, 24);
+            this.mfcMigrationLib.TabIndex = 66;
             // 
             // openGLLib
             // 
@@ -482,6 +492,8 @@
             this.scriptLib.Name = "scriptLib";
             this.scriptLib.Size = new System.Drawing.Size(128, 24);
             this.scriptLib.TabIndex = 50;
+
+            
 
            
             // FormProjectQtSettings
@@ -553,5 +565,6 @@
         private System.Windows.Forms.CheckBox webSocketsLib;
         private System.Windows.Forms.CheckBox windowsExtrasLib;
         private System.Windows.Forms.CheckBox quickWidgetsLib;
+        private System.Windows.Forms.CheckBox mfcMigrationLib;
     }
 }

@@ -98,6 +98,7 @@ namespace Qt5VSAddin
             this.xmlPatternsLib.Text = SR.GetString("XmlPatternsLibrary");
             this.scriptToolsLib.Text = SR.GetString("ScriptToolsLibrary");
             this.uiToolsLib.Text = SR.GetString("UiToolsLibrary");
+            this.mfcMigrationLib.Text = SR.GetString("MFCMigrationLibrary");
 
             threeDLib.Text = SR.GetString("3DLibrary");
             locationLib.Text = SR.GetString("LocationLibrary");
@@ -151,6 +152,8 @@ namespace Qt5VSAddin
            
             AddMapping(xmlLib, QtModule.Xml);
             AddMapping(xmlPatternsLib, QtModule.XmlPatterns);
+
+            AddMapping(mfcMigrationLib, QtModule.MFCMigration);
 
             if (qtVersion.StartsWith("5"))
             {
@@ -210,6 +213,7 @@ namespace Qt5VSAddin
             saveModules();
             this.okButton.DialogResult = DialogResult.OK;
             this.Close();
+            qtProject.Project.Save();
         }
 
         private void InitModules()
@@ -234,18 +238,26 @@ namespace Qt5VSAddin
                     {
                         if (libraryPrefix.StartsWith("QtUiTools"))
                             libraryPrefix = "Qt" + libraryPrefix.Substring(2) + "_Ad_";
+                        else if (libraryPrefix.StartsWith("QtSolutions_MFCMigrationFramework"))
+                            libraryPrefix = "QtSolutions_MFCMigrationFramework_Ad_2";
                         else
                             libraryPrefix = "Qt" + libraryPrefix.Substring(2) + "_Ad_4";
                     }
                     else
                         libraryPrefix = "Qt" + libraryPrefix.Substring(2);
                 }
+              
+
                 string full_path = install_path + "\\lib\\" + libraryPrefix + ".lib";
                 System.IO.FileInfo fi = new System.IO.FileInfo(full_path);
                 if (!fi.Exists)
                 {
-                    full_path = install_path + "\\binary\\win_vc11\\x64\\lib\\" + libraryPrefix + ".lib";
-                    fi = new System.IO.FileInfo(full_path);
+                    if (libraryPrefix.StartsWith("QtSolutions_MFCMigrationFramework"))
+                        full_path = install_path + "\\QtApps\\qtwinmigrate\\2.8\\binary\\win_vc11\\x64\\lib\\" + libraryPrefix + ".lib";        
+                    else
+                        full_path = install_path + "\\binary\\win_vc11\\x64\\lib\\" + libraryPrefix + ".lib";
+               
+                   fi = new System.IO.FileInfo(full_path);
                 }
                 item.checkbox.Enabled = fi.Exists;
                 if (fi.Exists == false)
@@ -259,7 +271,10 @@ namespace Qt5VSAddin
 
         private void saveModules()
         {
-            qtProject = QtProject.Create(project);
+
+            if (qtProject == null)
+                qtProject = QtProject.Create(project);
+
             for (int i = 0; i < moduleMap.Count; ++i)
             {
                 ModuleMapItem item = moduleMap[i];
@@ -273,6 +288,8 @@ namespace Qt5VSAddin
                 }
             }
         }
+
+        
 
     }
 }

@@ -44,6 +44,7 @@ namespace Digia.Qt5ProjectLib
     using EnvDTE;
     using System;
     using System.IO;
+    using System.Reflection;
     using System.Collections;
     using System.Collections.Generic;
     using System.Windows.Forms;
@@ -239,6 +240,8 @@ namespace Digia.Qt5ProjectLib
             }
         }
 
+
+
         public void AddModule(QtModule module)
         {
             if (HasModule(module))
@@ -249,11 +252,13 @@ namespace Digia.Qt5ProjectLib
             if (versionInfo == null)
                 versionInfo = vm.GetVersionInfo(vm.GetDefaultVersion());
 
+            List<string> lastDepens = null;
+            List<string> oldDepens = null;
+            LinkerToolWrapper oldLinkerWrapper = null;
             foreach (VCConfiguration config in (IVCCollection)vcPro.Configurations)
             {
                 CompilerToolWrapper compiler = CompilerToolWrapper.Create(config);
                 VCLinkerTool linker = (VCLinkerTool)((IVCCollection)config.Tools).Item("VCLinkerTool");
-                string depens = linker.AdditionalDependencies;
 
                 QtModuleInfo info = QtModules.Instance.ModuleInformation(module);
                 if (compiler != null)
@@ -270,6 +275,31 @@ namespace Digia.Qt5ProjectLib
                     List<string> moduleLibs = info.GetLibs(IsDebugConfiguration(config), versionInfo);
                     LinkerToolWrapper linkerWrapper = new LinkerToolWrapper(linker);
                     List<string> additionalDeps = linkerWrapper.AdditionalDependencies;
+
+                    if (oldLinkerWrapper == null)
+                    {
+                        oldLinkerWrapper = linkerWrapper;
+                        oldDepens = additionalDeps;
+                    }
+                    else if (additionalDeps == oldLinkerWrapper.AdditionalDependencies)
+                    {
+                        oldLinkerWrapper.AdditionalDependencies = oldDepens;
+                        throw new QtVSException("Failed to add the libarires in AdditionalDependencies");
+                        ("The AdditionalDependencies property is not configuration specific. \n Please do it such as: <AdditionalDependencies Condition=\"'$(Configuration)|$(Platform)'=='Hybrid|x64'\">...<AdditionalDependencies>", "3ds Max Add-in");
+                    }
+                   
+                    foreach (string moduleLib in moduleLibs)
+                        if (moduleLib.StartsWith("QtSolutions_MFCMigrationFramework"))
+                        {
+                            List<string> paths = linkerWrapper.AdditionalLibraryDirectories;
+                            if (!paths.Contains("$(QtMigrateLib)"))
+                            {
+                                paths.Add("$(QtMigrateLib)");
+                                linkerWrapper.AdditionalLibraryDirectories = paths;
+                            }
+                            break;
+                        }
+
                     bool dependenciesChanged = false;
                     if (additionalDeps == null || additionalDeps.Count == 0)
                     {
@@ -286,7 +316,11 @@ namespace Digia.Qt5ProjectLib
                             }
                     }
                     if (dependenciesChanged)
+                    {
+                        if (lastDepens == null)
+                            lastDepens = additionalDeps;
                         linkerWrapper.AdditionalDependencies = additionalDeps;
+                    }
                 }
 
 #if ENABLE_WINCE

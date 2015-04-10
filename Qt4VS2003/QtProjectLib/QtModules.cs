@@ -100,6 +100,7 @@ namespace Digia.Qt5ProjectLib
         WebkitWidgets = 50,
         Concurrent = 51,
         MultimediaWidgets = 52,
+        MFCMigration = 53
     }
 
     public class QtModuleInfo
@@ -140,16 +141,32 @@ namespace Digia.Qt5ProjectLib
         {
             List<string> libs = new List<string>();
             string libName = LibraryPrefix;
-            if (libName.StartsWith("Qt"))
-                libName = "Qt" + libName.Substring(2);
 
-            libName += "_Ad_";
-            if (libName.StartsWith("Qt"))
+            if (libName == "QAxServer" || libName == "QAxContainer")
             {
                 if (isDebugCfg)
-                    libName += "d4";
-                else
-                    libName += "4";
+                    libName += "d";
+            }
+            else if (libName.StartsWith("QtSolutions_MFCMigrationFramework"))
+            {
+                libName += "_Ad_";
+                if (isDebugCfg)
+                    libName += "d";
+                libName += "2";
+            }
+            else
+            {
+                if (libName.StartsWith("Qt"))
+                    libName = "Qt" + libName.Substring(2);
+
+                libName += "_Ad_";
+                if (libName.StartsWith("Qt"))
+                {
+                    if (isDebugCfg)
+                        libName += "d4";
+                    else
+                        libName += "4";
+                }
             }
             libName += ".lib";
             libs.Add(libName);
@@ -227,6 +244,7 @@ namespace Digia.Qt5ProjectLib
             InitQtModule(QtModule.Xml, "QtXml", "QT_XML_LIB");
             InitQtModule(QtModule.Script, "QtScript", "QT_SCRIPT_LIB");
             InitQtModule(QtModule.XmlPatterns, "QtXmlPatterns", "QT_XMLPATTERNS_LIB");
+            InitQtModule(QtModule.MFCMigration, "QtSolutions_MFCMigrationFramework", "QT_QTWINMIGRATE_IMPORT");
             moduleInfo = InitQtModule(QtModule.ScriptTools, "QtScriptTools", "QT_SCRIPTTOOLS_LIB");
             moduleInfo = InitQtModule(QtModule.Designer, "QtDesigner", new string[]{"QDESIGNER_EXPORT_WIDGETS", "QT_DESIGNER_LIB"});
             moduleInfo = InitQtModule(QtModule.Main, "qtmain", "");
