@@ -44,7 +44,6 @@ using System.Windows.Forms;
 using System.Collections.Generic;
 using EnvDTE;
 
-
 using Digia.Qt5ProjectLib;
 namespace Qt5VSAddin
 {
@@ -207,8 +206,23 @@ namespace Qt5VSAddin
             }
         }
 
+        private bool testAddtionalDepensConfigSpecific()
+        {
+
+            if (qtProject == null)
+                qtProject = QtProject.Create(project);
+            return qtProject.isAddtionalDepensConfigSpecific();
+        }
+
         private void okButton_Click(object sender, EventArgs e)
         {
+            if (!testAddtionalDepensConfigSpecific())
+            {
+                qtProject.Project.Save();
+                this.Close();
+                MessageBox.Show("The AdditionalDependencies property is not configuration specific. \n Please do it such as: <AdditionalDependencies Condition=\"'$(Configuration)|$(Platform)'=='Hybrid|x64'\">...<AdditionalDependencies>", "3ds Max Add-in");
+                return;
+            }
             qtSettings.SaveSettings();
             saveModules();
             this.okButton.DialogResult = DialogResult.OK;
@@ -270,26 +284,24 @@ namespace Qt5VSAddin
         }
 
         private void saveModules()
-        {
+        {  
+              if (qtProject == null)
+                    qtProject = QtProject.Create(project);
 
-            if (qtProject == null)
-                qtProject = QtProject.Create(project);
-
-            for (int i = 0; i < moduleMap.Count; ++i)
-            {
-                ModuleMapItem item = moduleMap[i];
-                bool isModuleChecked = item.checkbox.Checked;
-                if (isModuleChecked != item.initialValue)
+                for (int i = 0; i < moduleMap.Count; ++i)
                 {
-                    if (isModuleChecked)
-                        qtProject.AddModule(item.moduleId);
-                    else
-                        qtProject.RemoveModule(item.moduleId);
+                    ModuleMapItem item = moduleMap[i];
+                    bool isModuleChecked = item.checkbox.Checked;
+                    if (isModuleChecked != item.initialValue)
+                    {
+                        if (isModuleChecked)
+                            qtProject.AddModule(item.moduleId);
+                        else
+                            qtProject.RemoveModule(item.moduleId);
+                    }
                 }
             }
+           
         }
 
-        
-
-    }
 }
